@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+  wordpress:
+    container_name: 'app_eumeimportosim_wp'
+    image: wordpress:5.3.0-php7.2-apache
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: sys_user
+      WORDPRESS_DB_PASSWORD: sys_password
+      WORDPRESS_DB_NAME: eumeimportosim_wp
+#      WORDPRESS_DEBUG: 1
+      WORDPRESS_TABLE_PREFIX: ems_
+    volumes:
+      - ./src/wp-content:/var/www/html/wp-content
+      - ./src/.htaccess:/var/www/html/.htaccess
+  db:
+    container_name: 'banco_eumeimportosim_wp'
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: eumeimportosim_wp
+      MYSQL_USER: sys_user
+      MYSQL_PASSWORD: sys_password
+      MYSQL_ROOT_PASSWORD: iec7Aediec7shoovoo7eiKaeliip7eCh
+#      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - ./docker/mysql:/var/lib/mysql
+
