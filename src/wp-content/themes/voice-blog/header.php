@@ -31,6 +31,7 @@
 					</div>
 					<!-- Title -->
 					<div class=" logo text-center mx-auto overlays" >
+					<a class="p-4" href="http://app.eumeimportosim.com.br/" target="_blank" style="cursor: pointer;color: #fece3d;float: right;">Entrar</a>
 						<?php if(absint(get_theme_mod('voice_blog_social_top_enable','0'))==1) : 
 							voice_blog_social_network();
 						endif ; ?>
